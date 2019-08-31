@@ -1,5 +1,6 @@
 import os
 import re
+from time import sleep
 
 apps = {'GoogleMaps':('com.google.android.apps.maps','com.google.android.maps.MapsActivity'),
 		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity')}
@@ -62,6 +63,17 @@ def isLocked():
 	"""Check if it is locked"""
 	return getDump('power','mUserActivityTimeoutOverrideFromWindowManager=-1')==[]
 
+def unlock(PIN = None):
+    """unlock phone, swipes from bottom to the middle of the screen + PIN + enter"""
+    pressKey(26)
+    sleep(0.500)
+    if isSuspended():
+        pressKey(26)
+    (w,h) = getScreenSize()  
+    swipe(w/2,h/2,w/2,0)
+    if PIN != None:
+        insertText(PIN)
+        pressKey(66)
 	
 if __name__ == "__main__":
 	
@@ -71,8 +83,5 @@ if __name__ == "__main__":
         print('connected')
     else:
         print('disconnected')
-    
-    (w,h) = getScreenSize()    
-    swipe(w/2,h,w/2,0)
-    openURL('http://facebook.com')
-	    
+    print(isLocked())
+    unlock()
