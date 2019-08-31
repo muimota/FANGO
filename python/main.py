@@ -20,10 +20,11 @@ def sendAdb( command, debug = False ):
     return os.popen('adb shell {}'.format(command)).read()
 
 def pressKey(keyCode):
-    """send a key press """
+    """send a key press can be a character or a phone's button"""
     return sendAdb('input keyevent {}'.format(keyCode))
 
 def insertText(text):
+    """insert text as if it was inserted from an external keyboard"""
     sendAdb('input  keyboard text \"{}\"'.format(text),True)
 
 def getScreenSize():
@@ -74,7 +75,7 @@ def unlock(PIN = None):
     if PIN != None:
         insertText(PIN)
         pressKey(66)
-	
+
 if __name__ == "__main__":
 	
     import time
