@@ -22,6 +22,9 @@ def pressKey(keyCode):
     """send a key press """
     return sendAdb('input keyevent {}'.format(keyCode))
 
+def insertText(text):
+    sendAdb('input  keyboard text \"{}\"'.format(text),True)
+
 def getScreenSize():
     """return screen size in a tuple"""
     output  = sendAdb('wm size')
@@ -39,6 +42,10 @@ def launchActivity(package,intent):
 def swipe(x0,y0,x1,y1):
 	"""send swipe"""
 	sendAdb('input swipe {} {} {} {}'.format(x0,y0,x1,y1))
+
+def tap(x,y):
+    """tap the screen"""
+    sendAdb( 'input tap {} {}'.format(x,y))
 
 def getDump(subsytem,term = None):
 	"""retrieves sysdump of a system optionally can filter the output"""
