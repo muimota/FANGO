@@ -49,18 +49,18 @@ def tap(x,y):
 
 def getDump(subsytem,term = None):
 	"""retrieves sysdump of a system optionally can filter the output"""
-	lines = sendAdb('dumpsys power').split('\n')
+	lines = sendAdb('dumpsys {}'.format(subsytem)).split('\n')
 	if term != None:
-		lines = filter(lambda l:term in l,lines)
+		lines = list(filter(lambda l:term in l,lines))
 	return lines
 
 def isSuspended():
 	"""Check if it is suspended (black screen)"""
-	return getDump('power','mHoldingDisplaySuspendBlocker=true')!=[]
+	return getDump('power','mHoldingDisplaySuspendBlocker=true')==[]
 
 def isLocked():
 	"""Check if it is locked"""
-	return getDump('power','mUserActivityTimeoutOverrideFromWindowManager=-1')
+	return getDump('power','mUserActivityTimeoutOverrideFromWindowManager=-1')==[]
 
 	
 if __name__ == "__main__":
