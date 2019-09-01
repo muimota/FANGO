@@ -1,9 +1,28 @@
-# FANGo
+#FANGo
 
+
+Python xml
+'''
+>>> import xml.etree.ElementTree as ET
+>>> tree = ET.parse('view.xml')
+>>> root = tree.getroot()
+>>> e = root.find(".//node[@resource-id='com.google.android.youtube:id/like_button']")
+>>> e.attrib['bounds']
+'[42,1092][241,1297]'
+'''
 ## Instagram
 
 com.instagram.android:id/item_emoji
 com.instagram.android:id/row_feed_emoji_picker_plus_icon
+//botones de abajo
+com.instagram.android:id/tab_icon
+
+## Youtube 
+like
+com.google.android.youtube:id/like_button
+like add
+com.google.android.youtube:id/brand_interaction_thumbs_up
+
 
 ## software
 
@@ -22,6 +41,9 @@ https://stackoverflow.com/questions/26586685/is-there-a-way-to-get-current-activ
 
 In the future to control more than one device
 https://developer.android.com/studio/command-line/adb#directingcommands
+
+android keycodes
+https://developer.android.com/reference/android/view/KeyEvent.html
 
 ## ADB commands
 

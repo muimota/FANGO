@@ -54,8 +54,7 @@ def extractBounds(xmlElement):
     bounds = xmlElement.attrib['bounds']
     print(bounds)
     m = re.search(r'\[([0-9]+),([0-9]+)\]',bounds)
-    return (int(m.group(1)),int(m.group(2)))
-
+    return (int(m.group(1)) + 5,int(m.group(2)) + 5)
 
 
 def openURL(url):
@@ -66,13 +65,16 @@ def launchActivity(package,intent):
 	"""Launch an Activity from a package"""
 	sendAdb( 'am start -n {}/{}'.format(package,intent))
 
-def swipe(x0,y0,x1,y1):
-	"""send swipe"""
-	sendAdb('input swipe {} {} {} {}'.format(x0,y0,x1,y1))
+def swipe(x0,y0,x1,y1, ms = 500 ):
+	"""send swipe start, end coordinates and miliseconds"""
+	sendAdb('input swipe {} {} {} {} {}'.format(x0,y0,x1,y1,ms))
 
-def tap(x,y):
+def tap(x,y,ms = 0):
     """tap the screen"""
-    sendAdb( 'input tap {} {}'.format(x,y))
+    if ms > 0:
+        swipe(*((x,y) + (x,y) + (ms,)))
+    else:
+        sendAdb( 'input tap {} {}'.format(x,y))
 
 def getDump(subsytem,term = None):
 	"""retrieves sysdump of a system optionally can filter the output"""
@@ -121,7 +123,7 @@ if __name__ == "__main__":
     
    
     
-    for i in range(10):
+    for i in range(50):
 
         root = getXMLUI()
 
@@ -139,17 +141,17 @@ if __name__ == "__main__":
             swipe(w/2,3*h/4,w/2,h/4)
 
         root = getXMLUI()
-       
-        images = root.findall(".//node[@class='android.widget.ImageView'][@resource-id='']")
-        index = random.randint(0,len(images)-1)
+        imagesFrame = root.find(".//node[@class='android.widget.ListView'][@resource-id='android:id/list']")
+        images = imagesFrame.findall(".//node[@class='android.widget.ImageView'][@resource-id='']")
+        index = random.randint(4,len(images)-1)
         sleep(1)
         bounds = extractBounds(images[index])
-        print(index)
-        print(bounds)
+        
+        print("total:{} selected:{} bounds:{} desc:{}".format(len(images),index,bounds,images[index].attrib['content-desc']))
         tap(*bounds)
         print('feed')
         
-        for i in range(10):
+        for i in range(2):
         
             swipe(w/2,3*h/4,w/2,h/4)
             sleep(.5)
