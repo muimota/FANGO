@@ -42,8 +42,9 @@ def getXMLUI():
     m = re.search(r'(\S+.xml)', output)
     if m == None:
         print('error')
-        return None
-    filepath = m.group(1)
+        filepath = '/sdcard/window_dump.xml'
+    else:
+        filepath = m.group(1)
     xmlstr = sendAdb('cat {}'.format(filepath))
     root = ET.fromstring(xmlstr)
     return root
@@ -116,31 +117,48 @@ if __name__ == "__main__":
     print(isSuspended())
     unlock(2001)
     launchActivity(*apps['Instagram'])
-    root = getXMLUI()
     
-
-    #explore
-    buttons = root.findall(".//node[@resource-id='com.instagram.android:id/tab_icon']")
-    tap(*extractBounds(buttons[1]))
-
-    #click in a random image from explore 
     
-    for i in range(random.randint(0,4)):
-        swipe(w/2,3*h/4,w/2,h/4)
-
-    root = getXMLUI()
-    images = root.findall(".//node[@class='android.widget.ImageView'][@resource-id='']")
-    tap(*extractBounds(random.choice(images)))
-    print('feed')
+   
     
     for i in range(10):
-       
-        swipe(w/2,3*h/4,w/2,h/4)
-        sleep(.5)
+
         root = getXMLUI()
-        hearts = root.findall(".//node[@resource-id='com.instagram.android:id/row_feed_button_like']")
-        if len(hearts) > 0:
-            heart = random.choice(hearts)
-            tap(*extractBounds(heart))
-            tap(*extractBounds(heart))
-            
+
+        #explore
+        #buttons = root.findall(".//node[@resource-id='com.instagram.android:id/tab_icon']")
+        #if len(buttons) ==  0:
+        #pressKey(3) #home
+        launchActivity(*apps['Instagram'])
+        buttons = root.findall(".//node[@resource-id='com.instagram.android:id/tab_icon']")
+        tap(*extractBounds(buttons[1]))
+
+        #click in a random image from explore 
+        
+        for i in range(random.randint(1,4)):
+            swipe(w/2,3*h/4,w/2,h/4)
+
+        root = getXMLUI()
+       
+        images = root.findall(".//node[@class='android.widget.ImageView'][@resource-id='']")
+        index = random.randint(0,len(images)-1)
+        sleep(1)
+        bounds = extractBounds(images[index])
+        print(index)
+        print(bounds)
+        tap(*bounds)
+        print('feed')
+        
+        for i in range(10):
+        
+            swipe(w/2,3*h/4,w/2,h/4)
+            sleep(.5)
+            root = getXMLUI()
+            hearts = root.findall(".//node[@resource-id='com.instagram.android:id/row_feed_button_like']")
+            if len(hearts) > 0:
+                heart = random.choice(hearts)
+                tap(*extractBounds(heart))
+                sleep(.5)
+                tap(*extractBounds(heart))
+            else:
+                print('no hearts')
