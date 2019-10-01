@@ -1,4 +1,7 @@
-import os
+# FANGoLib
+# 2019 Martin Nadal martin@muimota.net
+
+from subprocess import PIPE, Popen
 import re
 from time import sleep
 import xml.etree.ElementTree as ET
@@ -7,19 +10,29 @@ import random
 apps = {'GoogleMaps':('com.google.android.apps.maps','com.google.android.maps.MapsActivity'),
 		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity')}
 
+
+def sendAdb( command, debug = False ):
+    """send a adb shell command"""
+    adbCommand = 'adb shell {}'.format(command)
+    if debug:
+        print(adbCommand)
+    
+    p = Popen(adbCommand, shell=True, stdout=PIPE, stderr=PIPE)
+    
+    stdout, stderr = p.communicate()
+    
+    if b'error: no devices/emulators found' in stderr:
+        raise Exception('No device/emulator found')
+    
+    return stdout.decode('utf-8')
+
 def checkDevice():
     """checks if device is open"""
-    output   = os.popen('adb devices').read()
+    output   = sendAdb('adb devices')
     devices = [line for line in output.split('\n') if len(line.strip()) > 0][1:]
 
     return len(devices) > 0
 
-def sendAdb( command, debug = False ):
-    """send a adb shell command"""
-    if debug:
-        print('adb shell {}'.format(command))
-
-    return os.popen('adb shell {}'.format(command)).read()
 
 def pressKey(keyCode):
     """send a key press can be a character or a phone's button"""
@@ -50,7 +63,7 @@ def getXMLUI():
     return root
 
 def extractBounds(xmlElement):
-
+    """returns press coords from an UI element"""
     bounds = xmlElement.attrib['bounds']
     print(bounds)
     m = re.search(r'\[([0-9]+),([0-9]+)\]',bounds)
