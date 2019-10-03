@@ -10,6 +10,15 @@ import random
 apps = {'GoogleMaps':('com.google.android.apps.maps','com.google.android.maps.MapsActivity'),
 		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity')}
 
+def checkDevice():
+    """checks if device is open"""
+    p = Popen('adb devices', shell=True, stdout=PIPE, stderr=PIPE)
+    stdout, stderr = p.communicate() 
+    output = stdout.decode('utf-8')
+    devices = [line for line in output.split('\n') if len(line.strip()) > 0][1:]
+
+    return len(devices) > 0
+
 
 def sendAdb( command, debug = False ):
     """send a adb shell command"""
@@ -26,12 +35,6 @@ def sendAdb( command, debug = False ):
     
     return stdout.decode('utf-8')
 
-def checkDevice():
-    """checks if device is open"""
-    output   = sendAdb('adb devices')
-    devices = [line for line in output.split('\n') if len(line.strip()) > 0][1:]
-
-    return len(devices) > 0
 
 
 def pressKey(keyCode):

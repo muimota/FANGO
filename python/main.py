@@ -44,15 +44,21 @@ def instagram(loops = 1):
                 print('no hearts')
 if __name__ == "__main__":
 
-    if checkDevice():
-        print('connected')
-    else:
-        print('disconnected')
+    while True:
+        try:
+            if checkDevice() == False:
+                print('not connected')
+                sleep(5)
+                continue
 
-    (w,h) = getScreenSize()
+            (w,h) = getScreenSize()
 
-    print(isSuspended())
-    unlock(2001)
-    launchActivity(*apps['Instagram'])
+            if isSuspended():
+                unlock(2001)
 
+            instagram()
+
+        except Exception as e:
+            print(e)
+            continue
 
