@@ -61,7 +61,7 @@ def getScreenSize():
     m = re.search(r'.*:\s+([0-9]+)x([0-9]+)', output)
     return (int(m.group(1)), int(m.group(2)))
 
-def getXMLUI():
+def getXMLUI(filename = None):
     """get the UI in XML format"""
     output  = sendAdb('uiautomator dump')
 
@@ -73,14 +73,15 @@ def getXMLUI():
         filepath = m.group(1)
     xmlstr = sendAdb('cat {}'.format(filepath))
     root = ET.fromstring(xmlstr)
+    if filename != None:
+        ET.ElementTree(root).write(filename)
     return root
 
 def extractBounds(xmlElement):
     """returns press coords from an UI element"""
     bounds = xmlElement.attrib['bounds']
-    print(bounds)
-    m = re.search(r'\[([0-9]+),([0-9]+)\]',bounds)
-    return (int(m.group(1)) + 5,int(m.group(2)) + 5)
+    m = re.search(r'\[([0-9]+),([0-9]+)\]\[([0-9]+),([0-9]+)\]',bounds)
+    return ((int(m.group(1)) + int(m.group(2))) // 2,(int(m.group(3)) + int(m.group(4))) // 2)
 
 
 def openURL(url):
