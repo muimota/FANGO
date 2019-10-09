@@ -6,12 +6,20 @@ from fangolib import *
 def instagram(loops = 1):
     for i in range(loops):
 
-        root = getXMLUI()
+        buttons = []
 
-      
-        launchActivity(*apps['Instagram'])
-        buttons = root.findall(".//node[@resource-id='com.instagram.android:id/tab_icon']")
-        tap(*extractBounds(buttons[1]))
+        while buttons == [] :
+            root = getXMLUI()
+            try:
+                launchActivity(*apps['Instagram'])
+            except:
+                pass
+            resource-id="com.instagram.android:id/tab_bar"
+            buttons = root.findall(".//node[@resource-id='com.instagram.android:id/tab_icon']")
+            if buttons == []:
+                pressKey(4)
+        
+        tap(*getCenter(buttons[1]))
 
         #click in a random image from explore
 
@@ -23,7 +31,7 @@ def instagram(loops = 1):
         images = imagesFrame.findall(".//node[@class='android.widget.ImageView'][@resource-id='']")
         index = random.randint(4,len(images)-1)
         sleep(.5)
-        bounds = extractBounds(images[index])
+        bounds = getCenter(images[index])
 
         print("total:{} selected:{} bounds:{} desc:{}".format(len(images),index,bounds,images[index].attrib['content-desc']))
         tap(*bounds)
@@ -37,9 +45,9 @@ def instagram(loops = 1):
             hearts = root.findall(".//node[@resource-id='com.instagram.android:id/row_feed_button_like']")
             if len(hearts) > 0 and random.random() < .2:
                 heart = random.choice(hearts)
-                tap(*extractBounds(heart))
+                tap(*getCenter(heart))
                 sleep(.15)
-                tap(*extractBounds(heart))
+                tap(*getCenter(heart))
             else:
                 print('no hearts')
 if __name__ == "__main__":

@@ -77,12 +77,11 @@ def getXMLUI(filename = None):
         ET.ElementTree(root).write(filename)
     return root
 
-def extractBounds(xmlElement):
+def getCenter(xmlElement):
     """returns press coords from an UI element"""
     bounds = xmlElement.attrib['bounds']
     m = re.search(r'\[([0-9]+),([0-9]+)\]\[([0-9]+),([0-9]+)\]',bounds)
-    return ((int(m.group(1)) + int(m.group(2))) // 2,(int(m.group(3)) + int(m.group(4))) // 2)
-
+    return ((int(m.group(1)) + int(m.group(3))) // 2,(int(m.group(2)) + int(m.group(4))) // 2)
 
 def openURL(url):
 	"""open URL with the default browser"""
