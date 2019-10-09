@@ -10,6 +10,9 @@ import random
 apps = {'GoogleMaps':('com.google.android.apps.maps','com.google.android.maps.MapsActivity'),
 		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity')}
 
+class FangoException(Exception):
+    pass
+
 def checkDevice():
     """checks if device is open"""
     p = Popen('adb devices', shell=True, stdout=PIPE, stderr=PIPE)
@@ -30,8 +33,15 @@ def sendAdb( command, debug = False ):
     
     stdout, stderr = p.communicate()
     
+    if debug:
+        print(adbCommand)
+        print(stderr)
+
     if b'error: no devices/emulators found' in stderr:
-        raise Exception('No device/emulator found')
+        raise FangoException('No device/emulator found')
+    if b'Warning: Activity not started, intent has been delivered to currently running top-most instance.' in stderr:
+        raise FangoException('activity not started')
+    
     
     return stdout.decode('utf-8')
 

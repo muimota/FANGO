@@ -55,10 +55,12 @@ if __name__ == "__main__":
 
             if isSuspended():
                 unlock(2001)
+                if isSuspended():
+                    raise Exception('imposible to unlock')
 
             instagram()
 
-        except Exception as e:
+        except FangoException as e:
             print(e)
             continue
 
