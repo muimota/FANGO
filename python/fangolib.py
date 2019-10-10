@@ -8,7 +8,9 @@ import xml.etree.ElementTree as ET
 import random
 
 apps = {'GoogleMaps':('com.google.android.apps.maps','com.google.android.maps.MapsActivity'),
-		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity')}
+		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity'),
+        'Amazon':('com.amazon.mShop.android.shopping','com.amazon.mShop.search.SearchActivity')
+        }
 
 class FangoException(Exception):
     pass
@@ -26,9 +28,6 @@ def checkDevice():
 def sendAdb( command, debug = False ):
     """send a adb shell command"""
     adbCommand = 'adb shell {}'.format(command)
-    if debug:
-        print(adbCommand)
-    
     p = Popen(adbCommand, shell=True, stdout=PIPE, stderr=PIPE)
     
     stdout, stderr = p.communicate()
