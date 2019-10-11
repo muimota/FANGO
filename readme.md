@@ -13,16 +13,29 @@ Python xml
 
 ## Instagram
 
-com.instagram.android:id/item_emoji
-com.instagram.android:id/row_feed_emoji_picker_plus_icon
-//botones de abajo
-com.instagram.android:id/tab_icon
+`com.instagram.android:id/item_emoji`
+`com.instagram.android:id/row_feed_emoji_picker_plus_icon`
+botones de abajo
+`com.instagram.android:id/tab_icon`
 
 ## Youtube 
 like
 com.google.android.youtube:id/like_button
 like add
 com.google.android.youtube:id/brand_interaction_thumbs_up
+
+## Amazon
+package:`com.amazon.mShop.android.shopping`
+activity:`com.amazon.mShop.search.SearchActivity`
+
+Pressing search button (84) opens search dialog
+### resources-ids
+search textfield 
+`com.amazon.mShop.android.shopping:id/rs_search_src_text`
+clear search textfield
+`com.amazon.mShop.android.shopping:id/rs_clear_text_button_accessibility`
+clear search suggestion
+`com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_clear`
 
 
 ## software

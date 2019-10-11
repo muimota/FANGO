@@ -31,8 +31,10 @@ def Instagram(loops = 1):
         root = getXMLUI()
         images = root.findall(".//node[@class='android.widget.ImageView'][@resource-id='com.instagram.android:id/image_button']")
         index = random.randint(0,len(images)-1)
-        sleep(.5)
-        bounds = getCenter(images[index])
+        index = 0
+        #sleep(.5)
+        clickableImages = [image for image in images if getCenter(image)[1] > h/5 or getCenter(image)[1] > 4*h/5]
+        bounds = getCenter(clickableImages[index])
 
         print("total:{} selected:{} bounds:{} desc:{}".format(len(images),index,bounds,images[index].attrib['content-desc']))
         tap(*bounds)
@@ -41,7 +43,7 @@ def Instagram(loops = 1):
         for i in range(random.randint(1,10)):
 
             swipe(w/2,3*h/4,w/2,h/4,random.randint(300,1000))
-            sleep(.15)
+            
             root = getXMLUI()
             hearts = root.findall(".//node[@resource-id='com.instagram.android:id/row_feed_button_like']")
             if len(hearts) > 0:

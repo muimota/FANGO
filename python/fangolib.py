@@ -66,10 +66,11 @@ def getXMLUI(filename = None):
 
     m = re.search(r'(\S+.xml)', output)
     if m == None:
-        print('error')
+        print(output)
         filepath = '/sdcard/window_dump.xml'
     else:
         filepath = m.group(1)
+
     xmlstr = sendAdb('cat {}'.format(filepath))
     root = ET.fromstring(xmlstr)
     if filename != None:
