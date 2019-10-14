@@ -60,18 +60,24 @@ def getScreenSize():
     m = re.search(r'.*:\s+([0-9]+)x([0-9]+)', output)
     return (int(m.group(1)), int(m.group(2)))
 
-def getXMLUI(filename = None):
+def getXMLUI(filename = None,device = None):
     """get the UI in XML format"""
-    output  = sendAdb('uiautomator dump')
+    if device == None:
+        output  = sendAdb('uiautomator dump')
+        m = re.search(r'(\S+.xml)', output)
+        if m == None:
+            print('no xml')
+            filepath = '/sdcard/window_dump.xml'
+        else:
+            filepath = m.group(1)
 
-    m = re.search(r'(\S+.xml)', output)
-    if m == None:
-        print(output)
-        filepath = '/sdcard/window_dump.xml'
+        xmlstr = sendAdb('cat {}'.format(filepath))
     else:
-        filepath = m.group(1)
-
-    xmlstr = sendAdb('cat {}'.format(filepath))
+        try:
+            xmlstr = device.dump_hierarchy()
+        except :
+            raise FangoException('UIAutomator2 exception')
+        
     root = ET.fromstring(xmlstr)
     if filename != None:
         ET.ElementTree(root).write(filename)
