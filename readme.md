@@ -37,6 +37,11 @@ clear search textfield
 clear search suggestion
 `com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_clear`
 
+## Facebook
+
+boton like:`text="Like"`
+link compartido:`content-desc="Shared Link:  ... "`
+
 
 ## software
 

@@ -28,11 +28,13 @@ if __name__ == "__main__":
             
             #home
             pressKey(3)
-            if random.random() < .3:
-                Instagram(3)
+            
+            if random.random() < .5:
+                Instagram(10)
             else:
-                Amazon()
-        except FangoException as e:
+                Amazon(10)
+        except Exception as e:
             print(e)
             continue
+			
 
