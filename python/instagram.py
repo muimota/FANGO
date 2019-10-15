@@ -35,8 +35,8 @@ def Instagram(loops = 1):
         sleep(.7)
         #click in a random image from explore
 
-        for i in range(random.randint(0,4)):
-            swipe(w/2,3*h/4,w/2,h/4)
+        #for i in range(random.randint(0,4)):
+        #    swipe(w/2,3*h/4,w/2,h/4)
 
         root = getXMLUI(device=d)
         images = root.findall(".//node[@class='android.widget.ImageView'][@resource-id='com.instagram.android:id/image_button']")
@@ -71,10 +71,11 @@ def Instagram(loops = 1):
             #detect hearts
             hearts = root.findall(".//node[@resource-id='com.instagram.android:id/row_feed_button_like']")
             if len(hearts) > 0:
-                heart = random.choice(hearts)
-                print('like!')
-                tap(*getCenter(heart))
-                sleep(.15)
-                tap(*getCenter(heart))
+                if random.random() < 0.05:
+                    heart = random.choice(hearts)
+                    print('like!')
+                    tap(*getCenter(heart))
+                    sleep(.15)
+                    
             else:
                 print('no hearts')
