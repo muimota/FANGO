@@ -25,7 +25,7 @@ def checkDevice():
     return len(devices) > 0
 
 
-def sendAdb( command, debug = False ):
+def sendAdb( command, debug = False, binary = False):
     """send a adb shell command"""
     adbCommand = 'adb shell {}'.format(command)
     p = Popen(adbCommand, shell=True, stdout=PIPE, stderr=PIPE)
@@ -41,8 +41,10 @@ def sendAdb( command, debug = False ):
     if b'Warning: Activity not started, intent has been delivered to currently running top-most instance.' in stderr:
         raise FangoException('activity not started')
     
-    
-    return stdout.decode('utf-8')
+    if binary:
+        return stdout
+    else:
+        return stdout.decode('utf-8')
 
 
 
@@ -52,7 +54,7 @@ def pressKey(keyCode):
 
 def insertText(text):
     """insert text as if it was inserted from an external keyboard"""
-    sendAdb('input  keyboard text \"{}\"'.format(text))
+    sendAdb('input  text \\"{}\\"'.format(text))
 
 def getScreenSize():
     """return screen size in a tuple"""
@@ -83,11 +85,16 @@ def getXMLUI(filename = None,device = None):
         ET.ElementTree(root).write(filename)
     return root
 
-def getCenter(xmlElement):
+def getBounds(xmlElement):
     """returns press coords from an UI element"""
     bounds = xmlElement.attrib['bounds']
     m = re.search(r'\[([0-9]+),([0-9]+)\]\[([0-9]+),([0-9]+)\]',bounds)
-    return ((int(m.group(1)) + int(m.group(3))) // 2,(int(m.group(2)) + int(m.group(4))) // 2)
+    return (int(m.group(1)),int(m.group(2)),int(m.group(3)),int(m.group(4)))
+
+def getCenter(xmlElement):
+    """returns press coords from an UI element"""
+    bounds = getBounds(xmlElement)
+    return (( bounds[0] + bounds[2]) // 2, (bounds[1] + bounds[3]) // 2)
 
 def openURL(url):
 	"""open URL with the default browser"""
@@ -134,3 +141,20 @@ def unlock(PIN = None):
     if PIN != None:
         insertText(PIN)
         pressKey(66)
+
+def screenshot(filename):
+    img = sendAdb('screencap -p',binary=True)
+    #https://blog.shvetsov.com/2013/02/grab-android-screenshot-to-computer-via.html
+    #img = img.replace(b'\r\n',b'\n')
+    with open(filename,'wb') as f:
+        f.write(img)
+
+def getContainers(x,y,xmlElements):
+    """get nodes that contains certain coordinates x,y usefull to find elements"""
+    filtered = []
+    for node in nodes:
+        bounds = getBounds(node)
+        if bounds[0] < x and bounds[2] > x and bounds[1] < y and bounds[3] > y:
+            filtered.append(node)
+    return filtered
+
