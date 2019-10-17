@@ -29,10 +29,16 @@ if __name__ == "__main__":
             #home
             pressKey(3)
             
-            if random.random() < .5:
+            rand = random.random()
+            if rand < .5:
                 Instagram(10)
-            else:
+            elif rand < .8:
                 Amazon(10)
+            else:
+                print('sleep')
+                pressKey(26)
+                sleep(10)
+                unlock(2001)            	
         except Exception as e:
             print(e)
             continue
