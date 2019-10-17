@@ -4,7 +4,7 @@ import random
 import uiautomator2 as ui2
 import glob
 import re
-def Amazon(loops = 6):
+def Amazon(loops = 6,savescreens = False):
     
     (w,h) = getScreenSize()
     d = ui2.connect()
@@ -75,8 +75,9 @@ def Amazon(loops = 6):
         sleep(6)
         imageIndex += 1
         filename = 'screens/{:06}.png'.format(imageIndex)
-        screenshot(filename)
-        print('save screenshot:{}'.format(filename))
+        if savescreens == True:
+        	screenshot(filename)
+        	print('save screenshot:{}'.format(filename))
         #multi image
         root = getXMLUI(device = d)
         pagination_block = root.find(".//node[@resource-id='image-block-pagination-dots']")
