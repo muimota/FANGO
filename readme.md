@@ -1,15 +1,16 @@
 #FANGo
 
+## Autostart
+ fango.services can be installed as a service following this [tutorial](https://www.raspberrypi.org/documentation/linux/usage/systemd.md)
 
-Python xml
-```
->>> import xml.etree.ElementTree as ET
->>> tree = ET.parse('view.xml')
->>> root = tree.getroot()
->>> e = root.find(".//node[@resource-id='com.google.android.youtube:id/like_button']")
->>> e.attrib['bounds']
-'[42,1092][241,1297]'
-```
+|            |                                                         |
+|------------|---------------------------------------------------------|
+|**Install** |`sudo cp fango.service /etc/systemd/system/fango.service`| 
+|**start**   |`sudo systemctl start myscript.service`                  |
+|**stop**    |`sudo systemctl start myscript.service`                  |
+|**install** | `sudo systemctl enable myscript.service`                |
+|            |                                                         |
+
 
 ## Instagram
 
