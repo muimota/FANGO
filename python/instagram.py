@@ -56,7 +56,7 @@ def Instagram(loops = 1):
             sleep(.5)
             root = getXMLUI(device=d)
             #detect if there is a multiple photograph
-            multi = root.find(".//node[@resource-id='com.instagram.android:id/carousel_bumping_text_indicator']")
+            multi = root.find(".//node[@resource-id='com.instagram.android:id/carousel_index_indicator_text_view']")
             if multi != None:
                 print('multiimage')
                 pages = int(multi.attrib['text'].split('/')[1])
