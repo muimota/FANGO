@@ -1,23 +1,34 @@
 # FANGo
+2019 - 2020 Martin Nadal
+## Dependencies
+ Some packages ([python3-pip](https://packages.debian.org/buster/python3-pip, [python3-lxml](https://packages.debian.org/buster/python3-lxml), [libopenjp2-7](https://packages.debian.org/buster/libopenjp2-7), [libtiff5](https://packages.debian.org/buster/libtiff5)) are not installed by defult in **raspibian lite**
+`apt install python3-pip python3-lxml libopenjp2-7 libtiff5`
+
+python install [uiautimator2](https://pypi.org/project/uiautomator2/)
+`pip3 install uiautomator2`
 
 ## Autostart
  fango.services can be installed as a service following this [tutorial](https://www.raspberrypi.org/documentation/linux/usage/systemd.md)
 
 |action      | command                                                        |
 |------------|---------------------------------------------------------|
-|Install     |`sudo cp fango.service /etc/systemd/system/fango.service`| 
+|Install     |`sudo cp fango.service /etc/systemd/system`|
 |start       |`sudo systemctl start fango.service`                  |
-|stop        |`sudo systemctl start fango.service`                  |
+|stop        |`sudo systemctl stop fango.service`                  |
 |enable at startup| `sudo systemctl enable fango.service`                |
+
+# App Notes
+
+This section has info aboutthe different applications
 
 ## Instagram
 
 `com.instagram.android:id/item_emoji`
 `com.instagram.android:id/row_feed_emoji_picker_plus_icon`
-botones de abajo
+bottom buttons
 `com.instagram.android:id/tab_icon`
 
-## Youtube 
+## Youtube
 like
 com.google.android.youtube:id/like_button
 like add
@@ -29,7 +40,7 @@ activity:`com.amazon.mShop.search.SearchActivity`
 
 Pressing search button (84) opens search dialog
 ### resources-ids
-search textfield 
+search textfield
 `com.amazon.mShop.android.shopping:id/rs_search_src_text`
 clear search textfield
 `com.amazon.mShop.android.shopping:id/rs_clear_text_button_accessibility`
@@ -45,7 +56,7 @@ link compartido:`content-desc="Shared Link:  ... "`
 ## software
 
 [python adb](https://github.com/google/python-adb)
-[android-udev-rules](https://github.com/M0Rf30/android-udev-rules.git) 
+[android-udev-rules](https://github.com/M0Rf30/android-udev-rules.git)
 
 [Stanley](https://f-droid.org/en/packages/fr.xgouchet.packageexplorer/) an app to get Intent names from android apps.
 
