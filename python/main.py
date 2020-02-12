@@ -25,22 +25,16 @@ if __name__ == "__main__":
                     raise FangoException('imposible to unlock')
                 else:
                     print('unlocked')
-            
+
             #home
             pressKey(3)
-            
+
             rand = random.random()
             if rand < .5:
-                Instagram(10)
-            elif rand < .8:
-                Amazon(10)
+                Instagram(5)
             else:
-                print('sleep')
-                pressKey(26)
-                sleep(10)
-                unlock(2001)            	
+                Amazon(10)
+
         except Exception as e:
             print(e)
             continue
-			
-
