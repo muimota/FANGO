@@ -9,7 +9,7 @@ import random
 
 apps = {'GoogleMaps':('com.google.android.apps.maps','com.google.android.maps.MapsActivity'),
 		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity'),
-        'Amazon':('com.amazon.mShop.android.shopping','com.amazon.mShop.search.SearchActivity')
+        'Amazon':('com.amazon.mShop.android.shopping','com.amazon.mShop.splashscreen.StartupActivity')
         }
 
 class FangoException(Exception):
