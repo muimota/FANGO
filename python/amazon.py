@@ -68,8 +68,7 @@ def Amazon(loops = 6,savescreens = False):
         swipe(w/2,h/2,w/2,0,random.randint(300,600))
         sleep(1)
         root = getXMLUI(device = d)
-        views = root.findall(".//node[@class='android.view.View']")
-        products = [view for view in views if len(view.attrib['text'].strip()) > 0 ]
+        products = root.findall(".//node[@resource-id='com.amazon.mShop.android.shopping:id/item_title']")
         if len(products) > 0:
             product = random.choice(products)
             print('product:{}'.format(product.attrib['text']))
