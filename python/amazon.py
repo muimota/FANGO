@@ -15,9 +15,15 @@ def Amazon(loops = 6,savescreens = False):
         imageIndex = int(re.match(r'.*/([0-9]+)\.png',lastimage).group(1))
     else:
         imageIndex = 0
-    
-    launchActivity(*apps['Amazon'])
-    
+    try:
+        launchActivity(*apps['Amazon'])
+        skip_login = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/skip_sign_in_button']")
+        if skip_login :
+        	 tap(*getCenter(skip_login))	
+    except:
+        print('oh!')
+        pass
+
     for i in range(loops):
         alphabet = ('abcdefghijklmnopqrstuvwxyz')
         
