@@ -10,29 +10,32 @@ def Instagram(loops = 1):
     
     for i in range(loops):
 
-        buttons = []
+        button = None
+        print('launch Instagram')
+   		
+        try:
+            launchActivity(*apps['Instagram'])
+        except:
+            print('exception')
+            pass
+            
+        sleep(2)
+        print('capture xml')
+        root = getXMLUI(device=d)
 
-        while buttons == [] :
-            
-            
-            try:
-                launchActivity(*apps['Instagram'])
-            except:
-                print('exception')
-                pass
-            root = getXMLUI(device=d)
-            sleep(2)
-            
-            buttons = root.findall(".//node[@resource-id='com.instagram.android:id/tab_icon']")
-            if buttons == []:
-                print('no tab')
-                continue
-        
-        tap(*getCenter(buttons[1]))
+        print('home menu')
+        buttons = root.findall(".//node[@content-desc='Home']")
+        print('{} buttons found'.format(len(buttons)))
+        yoffset = [getCenter(btn) for btn in buttons]
+        button = buttons[yoffset.index(min(yoffset))]
+         
+        tap(*getCenter(button))
         sleep(.4)
-        tap(*getCenter(buttons[1]))
-        swipe(w/2,h/4,w/2,h/2)
-        sleep(.7)
+        
+        button = root.find(".//node[@content-desc='Search and Explore']")
+        tap(*getCenter(button))
+        sleep(.4)
+       
         #click in a random image from explore
 
         #for i in range(random.randint(0,4)):
