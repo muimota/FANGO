@@ -24,27 +24,34 @@ def Instagram(loops = 1):
         sleep(2)
         print('capture xml')
 
-        root = getXMLUI(device=d)
+        
 
         #TODO:check is we are ina Comments page
         
-        print('home menu')
-        buttons = root.findall(".//node[@content-desc='Home']")
-        print('{} buttons found'.format(len(buttons)))
-        yoffset = [getCenter(btn) for btn in buttons]
-        button = buttons[yoffset.index(min(yoffset))]
-         
-        tap(*getCenter(button))
-        sleep(.4)
-
+        print("search")
         root = getXMLUI(device=d)
-        button = root.find(".//node[@content-desc='Search and Explore']")
-        tap(*getCenter(button))
+        searchBtn = root.find(".//node[@content-desc='Search and Explore']")
+        
+        if not searchBtn:
+            print("search button not found")
+            button = root.find(".//node[@content-desc='Home'][@package='com.instagram.android']") 
+            tap(*getCenter(button))
+            sleep(.4)
+            root = getXMLUI(device=d)
+            searchBtn = root.find(".//node[@content-desc='Search and Explore']")
+            
+        if searchBtn:
+            print("search button found")
+        
+        print("tap search");
+        tap(*getCenter(searchBtn))
+        
         sleep(.4)
-
+        
         root = getXMLUI(device=d)
         t = root.find('.//node[@resource-id="com.instagram.android:id/action_bar_search_edit_text"]')
         sleep(.4)
+        print(t)
         tap(*getCenter(t))
         insertText('#')
         insertText(random.choice(alphabet))
@@ -72,6 +79,7 @@ def Instagram(loops = 1):
         index = random.randint(0,len(clickableImages)-1)
         bounds = getCenter(clickableImages[index])
         
+        print("{} images".format(len(clickableImages)))
         print("total:{} selected:{} bounds:{} desc:{}".format(len(clickableImages),clickableImages,bounds,clickableImages[index].attrib['content-desc']))
         tap(*bounds)
         print('feed')
