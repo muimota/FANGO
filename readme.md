@@ -1,7 +1,7 @@
 # FANGo
 2019 - 2020 Martin Nadal
 ## Dependencies
- Some packages ([python3-pip](https://packages.debian.org/buster/python3-pip, [python3-lxml](https://packages.debian.org/buster/python3-lxml), [libopenjp2-7](https://packages.debian.org/buster/libopenjp2-7), [libtiff5](https://packages.debian.org/buster/libtiff5)) are not installed by defult in **raspibian lite**
+ Some packages ([python3-pip](https://packages.debian.org/buster/python3-pip), [python3-lxml](https://packages.debian.org/buster/python3-lxml), [libopenjp2-7](https://packages.debian.org/buster/libopenjp2-7), [libtiff5](https://packages.debian.org/buster/libtiff5)) are not installed by defult in **raspibian lite**
 `apt install python3-pip python3-lxml libopenjp2-7 libtiff5`
 
 python install [uiautimator2](https://pypi.org/project/uiautomator2/)
