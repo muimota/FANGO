@@ -1,8 +1,10 @@
 # FANGo
 2019 - 2020 Martin Nadal
 ## Dependencies
- Some packages ([python3-pip](https://packages.debian.org/buster/python3-pip), [python3-lxml](https://packages.debian.org/buster/python3-lxml), [libopenjp2-7](https://packages.debian.org/buster/libopenjp2-7), [libtiff5](https://packages.debian.org/buster/libtiff5)) are not installed by defult in **raspibian lite**
-`apt install python3-pip python3-lxml libopenjp2-7 libtiff5`
+ Some packages ([python3-pip](https://packages.debian.org/buster/python3-pip), [python3-lxml](https://packages.debian.org/buster/python3-lxml), [libopenjp2-7](https://packages.debian.org/buster/libopenjp2-7), [libtiff5](https://packages.debian.org/buster/libtiff5), [adb](https://packages.debian.org/buster/android-tools-adb)) are not installed by defult in **raspibian lite**
+`apt install python3-pip python3-lxml libopenjp2-7 libtiff5 android-tools-adb`
+
+it is necessary to restart the device once these packages are installed
 
 python install [uiautimator2](https://pypi.org/project/uiautomator2/)
 `pip3 install uiautomator2`
@@ -19,7 +21,7 @@ python install [uiautimator2](https://pypi.org/project/uiautomator2/)
 
 # App Notes
 
-This section has info aboutthe different applications
+This section has info abou the different applications
 
 ## Instagram
 
