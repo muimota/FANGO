@@ -32,7 +32,7 @@ def Instagram(loops = 1):
         root = getXMLUI(device=d)
         searchBtn = root.find(".//node[@content-desc='Search and Explore']")
         
-        if not searchBtn:
+        if searchBtn == None:
             print("search button not found")
             button = root.find(".//node[@content-desc='Home'][@package='com.instagram.android']") 
             tap(*getCenter(button))
@@ -46,13 +46,19 @@ def Instagram(loops = 1):
         print("tap search");
         tap(*getCenter(searchBtn))
         
-        sleep(.4)
+        sleep(1)
         
         root = getXMLUI(device=d)
         t = root.find('.//node[@resource-id="com.instagram.android:id/action_bar_search_edit_text"]')
-        sleep(.4)
-        print(t)
+        
+        
+        if t == None:
+            print("search box not found")
+        
         tap(*getCenter(t))
+        tap(*getCenter(t))
+        
+
         insertText('#')
         insertText(random.choice(alphabet))
         insertText(random.choice(alphabet))
@@ -63,7 +69,8 @@ def Instagram(loops = 1):
         sleep(1)
         root = getXMLUI(device=d)
         suggestions = root.findall('.//node[@resource-id="com.instagram.android:id/row_hashtag_textview_tag_name"]')
-       
+        if not suggestions:
+            print("suggestions not found")
         tap(*getCenter(random.choice(suggestions)))
         sleep(10)     	 
         #click in a random image from explore
@@ -84,7 +91,7 @@ def Instagram(loops = 1):
         tap(*bounds)
         print('feed')
 
-        for i in range(random.randint(1,10)):
+        for i in range(random.randint(3,10)):
             
             swipe(w/2,3*h/4,w/2,h/4,random.randint(300,1000))
             sleep(.5)
@@ -105,7 +112,7 @@ def Instagram(loops = 1):
             #detect hearts
             hearts = root.findall(".//node[@resource-id='com.instagram.android:id/row_feed_button_like']")
             if len(hearts) > 0:
-                if random.random() < 0.05:
+                if random.random() < 0.005:
                     heart = random.choice(hearts)
                     print('like!')
                     tap(*getCenter(heart))
