@@ -30,19 +30,19 @@ def Amazon(loops = 6,savescreens = False):
         pressKey(84)
         root = getXMLUI(device = d)
         textField = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']")
-        tap(*getCenter(textField))
+
+        sleep(.4)
         root = getXMLUI(device = d)
-        clearSearch = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_clear_text_button_accessibility']")
-        
-        if clearSearch != None:
-            tap(*getCenter(clearSearch))
-            print('clear text')
+        textField = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']")
+        bounds = getBounds(textField)
+        tap(*(bounds[2]-10,(bounds[1]+bounds[3])//2))
+
         
         insertText(random.choice(alphabet))
         insertText(random.choice(alphabet))
         #insertText('er')
         
-        sleep(.2)
+        sleep(.4)
         root = getXMLUI(device = d)
         clearSuggestion = root.findall(".//node[@resource-id='com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_clear']")
         suggCount = len(clearSuggestion)
@@ -68,7 +68,7 @@ def Amazon(loops = 6,savescreens = False):
         swipe(w/2,h/2,w/2,0,random.randint(300,600))
         sleep(1)
         root = getXMLUI(device = d)
-        products = root.findall(".//node[@resource-id='com.amazon.mShop.android.shopping:id/item_title']")
+        products = root.findall(".//node[@class='android.widget.Image']")
         if len(products) > 0:
             product = random.choice(products)
             print('product:{}'.format(product.attrib['text']))
