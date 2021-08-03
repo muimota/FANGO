@@ -168,3 +168,7 @@ def getBatteryLevel():
     battDict = dict(battFields)
     
     return int(battDict['level'])
+
+def setScreenBrightness(level):
+    """sets screens brightness 0-255"""
+    sendAdb("settings put system screen_brightness {}".format(level))
