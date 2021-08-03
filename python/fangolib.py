@@ -158,3 +158,13 @@ def getContainers(x,y,xmlElements):
             filtered.append(node)
     return filtered
 
+def getBatteryLevel():
+    """reads phones battery level"""
+    #https://www.programmersought.com/article/38291685131/
+    battStatus = sendAdb("dumpsys battery")
+    battDict = {}
+    battFields =  [[fieldPair.strip() for fieldPair in line.split(':')] for line in battStatus.split('\n')] 
+    battFields = [pairs for pairs in battFields if (len(pairs) > 1 and len(pairs[1]) > 1)]
+    battDict = dict(battFields)
+    
+    return int(battDict['level'])
