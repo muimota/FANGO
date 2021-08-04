@@ -21,7 +21,7 @@ def Amazon(loops = 6,savescreens = False):
         if skip_login :
         	 tap(*getCenter(skip_login))	
     except:
-        print('oh!')
+        print('It\'s not necessary to skip sign in')
         pass
 
     for i in range(loops):
