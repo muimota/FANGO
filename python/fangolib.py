@@ -172,3 +172,9 @@ def getBatteryLevel():
 def setScreenBrightness(level):
     """sets screens brightness 0-255"""
     sendAdb("settings put system screen_brightness {}".format(level))
+
+def packageInstalled(packageName):
+    """checks if a package is installed"""
+    packageName = packageName.strip()
+    packageStatus = sendAdb('pm list packages {} '.format(packageName))
+    return packageName in packageStatus
