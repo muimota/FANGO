@@ -165,7 +165,7 @@ def screenshot(filename):
 def getContainers(x,y,xmlElements):
     """get nodes that contains certain coordinates x,y usefull to find elements"""
     filtered = []
-    for node in nodes:
+    for node in xmlElements:
         bounds = getBounds(node)
         if bounds[0] < x and bounds[2] > x and bounds[1] < y and bounds[3] > y:
             filtered.append(node)
