@@ -9,6 +9,10 @@ it is necessary to restart the device once these packages are installed
 python install [uiautimator2](https://pypi.org/project/uiautomator2/)
 `pip3 install uiautomator2`
 
+## development 
+
+`interactive.py` is a script that declares and inits the libraries to make easier to work in iteractive mode use it `python -i interactive.py`
+
 ## Autostart
  fango.services can be installed as a service following this [tutorial](https://www.raspberrypi.org/documentation/linux/usage/systemd.md)
 
