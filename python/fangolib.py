@@ -175,12 +175,10 @@ def getBatteryLevel():
     """reads phones battery level"""
     #https://www.programmersought.com/article/38291685131/
     battStatus = sendAdb("dumpsys battery")
-    battDict = {}
     battFields =  [[fieldPair.strip() for fieldPair in line.split(':')] for line in battStatus.split('\n')] 
-    battFields = [pairs for pairs in battFields if (len(pairs) > 1 and len(pairs[1]) > 1)]
-    battDict = dict(battFields)
+    level = [pairs[1] for pairs in battFields if pairs[0] == 'level'][0]
     
-    return int(battDict['level'])
+    return int(level)
 
 def setScreenBrightness(level):
     """sets screens brightness 0-255"""
