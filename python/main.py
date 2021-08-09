@@ -3,6 +3,7 @@ from time import sleep
 from fangolib import *
 from instagram import Instagram
 from amazon import Amazon
+from reddit import Reddit
 
 if __name__ == "__main__":
 
@@ -30,10 +31,13 @@ if __name__ == "__main__":
             pressKey(3)
 
             rand = random.random()
-            if rand < .5:
+
+            if rand < .33:
                 Instagram(5)
-            else:
+            elif rand < .66:
                 Amazon(10)
+            else:
+                Reddit(10)
 
         except Exception as e:
             print(e)
