@@ -52,31 +52,31 @@ def Instagram(loops = 1):
         tap(*getCenter(searchBtn))
         
         #searchbox 
-        
-        root = getXMLUI(device=d,selector=searchBox)
-        t = root.find(searchBox)
-        
-        
-        if t == None:
-            print("search box not found")
-        
-        tap(*getCenter(t))
-        tap(*getCenter(t))
-        
+        if random.random() < .25:
+            root = getXMLUI(device=d,selector=searchBox)
+            t = root.find(searchBox)
+            
+            
+            if t == None:
+                print("search box not found")
+            
+            tap(*getCenter(t))
+            tap(*getCenter(t))
+            
 
-        insertText('#')
-        insertText(random.choice(alphabet))
-        insertText(random.choice(alphabet))
-        sleep(1)
-        swipe(w/2,h/2,w/2,h/6)
-              
-        #suggestion
-        root = getXMLUI(device=d,selector=searchSug)
-        suggestions = root.findall(searchSug)
-        if not suggestions:
-            print("suggestions not found")
-        tap(*getCenter(random.choice(suggestions)))  	 
-        #click in a random image from explore
+            insertText('#')
+            insertText(random.choice(alphabet))
+            insertText(random.choice(alphabet))
+            sleep(1)
+            swipe(w/2,h/2,w/2,h/6)
+                
+            #suggestion
+            root = getXMLUI(device=d,selector=searchSug)
+            suggestions = root.findall(searchSug)
+            if not suggestions:
+                print("suggestions not found")
+            tap(*getCenter(random.choice(suggestions)))  	 
+            #click in a random image from explore
 
         root = getXMLUI(device=d,selector=imgTile)
         sleep(random.randint(200,2000)/1000)
@@ -103,12 +103,12 @@ def Instagram(loops = 1):
         for i in range(random.randint(3,10)):
             
             random.randint(500,2000)/1000
-            swipe(w/2,3*h/4,w/2,h/4,random.randint(300,1000))
+            swipe(w/2,3*h/4,w/2,h/4,random.randint(1000,3000))
            
             root = getXMLUI(device=d)
             #detect if there is a multiple photograph
             multi = root.find(".//node[@resource-id='com.instagram.android:id/carousel_index_indicator_text_view']")
-            if multi != None:
+            if multi != None and random.random() < .5:
                 print('multiimage')
                 pages = int(multi.attrib['text'].split('/')[1]) - 1
                 swipecoords = getCenter(multi)
