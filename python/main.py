@@ -18,12 +18,20 @@ if __name__ == "__main__":
 
             (w,h) = getScreenSize()
 
+            level = getBatteryLevel()
+            print("battery level:{}".format(level))
+            if level < 30:
+                setScreenBrightness(min(level,30))
+            elif level < 60:
+                setScreenBrightness(min(level,128))
+
+
             if isLocked():
                 print('locked')
                 unlock(2001)
                 sleep(.5)
                 if isLocked():
-                    raise FangoException('imposible to unlock')
+                    raise FangoException('impossible to unlock')
                 else:
                     print('unlocked')
 
@@ -33,12 +41,16 @@ if __name__ == "__main__":
             rand = random.random()
 
             if rand < .33:
-                Instagram(5)
+                Instagram(10)
             elif rand < .66:
                 Amazon(10)
             else:
                 Reddit(10)
 
+            
+            
         except Exception as e:
             print(e)
             continue
+
+        
