@@ -78,6 +78,14 @@ def Amazon(loops = 6,savescreens = False):
             tap(w/2,h/2)
             
         sleep(6)
+    
+        print('find cookies dialog')
+        root = getXMLUI(device = d)
+        accept_cookies = root.find(".//node[@resource-id='cc-banner-accept']")
+        if accept_cookies is not n:
+            print('accept cookies')
+            tap(*getCenter(accept_cookies))
+
         imageIndex += 1
         filename = 'screens/{:06}.png'.format(imageIndex)
         if savescreens == True:
