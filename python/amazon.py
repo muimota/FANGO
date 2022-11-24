@@ -54,8 +54,8 @@ def Amazon(loops = 6,savescreens = False):
         sleep(1)
         
         root = getXMLUI(device = d)
-        suggNodes = root.findall(".//node[@resource-id='com.amazon.mShop.android.shopping:id/iss_search_dropdown_item_text']")
-        suggestions = [suggNode.attrib['text'] for suggNode in suggNodes]
+        suggNodes = root.find(".//node[@resource-id='attach-to-me']")
+        suggestions = [suggNode.find('.//node[@index="1"]').attrib['text'] for suggNode in suggNodes]
         print(suggestions)
         if len(suggestions) > 0:
             suggestion = random.choice(suggestions)
@@ -82,15 +82,15 @@ def Amazon(loops = 6,savescreens = False):
         print('find cookies dialog')
         root = getXMLUI(device = d)
         accept_cookies = root.find(".//node[@resource-id='cc-banner-accept']")
-        if accept_cookies is not n:
+        if accept_cookies is not None:
             print('accept cookies')
             tap(*getCenter(accept_cookies))
 
         imageIndex += 1
         filename = 'screens/{:06}.png'.format(imageIndex)
         if savescreens == True:
-        	screenshot(filename)
-        	print('save screenshot:{}'.format(filename))
+            screenshot(filename)
+            print('save screenshot:{}'.format(filename))
         #multi image
         root = getXMLUI(device = d)
         pagination_block = root.find(".//node[@resource-id='image-block-pagination-dots']")
