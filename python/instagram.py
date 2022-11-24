@@ -28,7 +28,7 @@ def Instagram(loops = 1):
         #TODO:check is we are ina Comments page
         
         print("search")
-        searchButton = ".//node[@content-desc='Search and Explore']"
+        searchButton = ".//node[@content-desc='Search and explore']"
         searchBox    = './/node[@resource-id="com.instagram.android:id/action_bar_search_edit_text"]'
         homeButton   = ".//node[@content-desc='Home'][@package='com.instagram.android']"
         searchSug    = './/node[@resource-id="com.instagram.android:id/row_hashtag_textview_tag_name"]'
