@@ -21,7 +21,7 @@ def Reddit(loops = 1):
 
     selector = './/*[@resource-id="com.reddit.frontpage:id/link_list"]/node[@class="android.widget.LinearLayout"]'
     titles = './/*[@resource-id="com.reddit.frontpage:id/link_title"]'
-    search_box = './/*[@resource-id="com.reddit.frontpage:id/search_view"]'
+    search_box = './/*[@resource-id="com.reddit.frontpage:id/feed_control_search_icon"]'
     search_results = './/*[@resource-id="com.reddit.frontpage:id/search_results"].//*[@class="android.widget.RelativeLayout"]'
     bottom_nav_btns = './/*[@resource-id="com.reddit.frontpage:id/bottom_nav"].//*[@class="android.view.ViewGroup"]'
     for i in range(loops):
