@@ -22,8 +22,8 @@ def Reddit(loops = 1):
     selector = './/*[@resource-id="com.reddit.frontpage:id/link_list"]/node[@class="android.widget.LinearLayout"]'
     titles = './/*[@resource-id="com.reddit.frontpage:id/link_title"]'
     search_box = './/*[@resource-id="com.reddit.frontpage:id/feed_control_search_icon"]'
-    search_results = './/*[@resource-id="com.reddit.frontpage:id/search_results"].//*[@class="android.widget.RelativeLayout"]'
-    bottom_nav_btns = './/*[@resource-id="com.reddit.frontpage:id/bottom_nav"].//*[@class="android.view.ViewGroup"]'
+    search_results = './/*[@resource-id="search_typeahead_item_metadata"]'
+    bottom_nav_btns = './/*[@resource-id="com.reddit.frontpage:id/bottom_nav"].//*[@class="android.widget.Button"]'
     for i in range(loops):
         root = fl.getXMLUI(device=d,selector=bottom_nav_btns)
         home = root.findall(bottom_nav_btns)[0]
