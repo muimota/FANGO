@@ -189,3 +189,12 @@ def packageInstalled(packageName):
     packageName = packageName.strip()
     packageStatus = sendAdb('pm list packages {} '.format(packageName))
     return packageName in packageStatus
+
+def getRunningActivity():
+    """gets the running Activity and return the tuple (package,activity)"""
+    #https://stackoverflow.com/a/13212310/2205297
+    r = re.search(r"((?:\w|\.)+)\/((?:\w|\.)+)",sendAdb(" dumpsys window | grep -E 'mFocusedApp'"))
+    if r:
+        return r.groups()
+    else:
+        return None
