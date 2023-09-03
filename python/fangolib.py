@@ -82,6 +82,8 @@ def getXMLUI(filename = None,device = None,selector = None,timeout=2.0):
             try:
                 xmlstr = device.dump_hierarchy()
             except :
+                device.reset_uiautomator()
+                sleep(4)
                 raise FangoException('UIAutomator2 exception')
             
         root = ET.fromstring(xmlstr)
