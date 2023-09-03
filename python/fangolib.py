@@ -195,7 +195,7 @@ def packageInstalled(packageName):
 def getRunningActivity():
     """gets the running Activity and return the tuple (package,activity)"""
     #https://stackoverflow.com/a/13212310/2205297
-    r = re.search(r"((?:\w|\.)+)\/((?:\w|\.)+)",sendAdb(" dumpsys window | grep -E 'mFocusedApp'"))
+    r = re.search(r"((?:\w|\.)+)\/((?:\w|\.)+)",sendAdb(" dumpsys window | grep -E 'mCurrentFocus'"))
     if r:
         return r.groups()
     else:
