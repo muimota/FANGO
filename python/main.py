@@ -1,6 +1,7 @@
 
 from time import sleep
 from fangolib import *
+import uiautomator2 as ui2
 from instagram import Instagram
 from amazon import Amazon
 from reddit import Reddit
@@ -35,6 +36,17 @@ if __name__ == "__main__":
                 else:
                     print('unlocked')
 
+            
+            #there is a chance that running app returns null
+            runningApp = getRunningActivity()
+            
+            if runningApp:
+                (package,activity) = runningApp
+                print('running {}/{}'.format(package,activity))
+                if 'net.muimota' in package:
+                    sleep(20)
+                    continue
+
             #home
             pressKey(3)
 
@@ -51,6 +63,7 @@ if __name__ == "__main__":
             
         except Exception as e:
             print(e)
+            sleep(1)
             continue
 
         
