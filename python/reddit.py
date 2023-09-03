@@ -33,7 +33,9 @@ def Reddit(loops = 1):
         fl.insertText("r/")
         #One letter to garantee we don't display any NSFW content
         fl.insertText(random.choice(alphabet)) 
-        
+        while random.random()<.5:
+            fl.insertText(random.choice(alphabet)) 
+            
         
         root = fl.getXMLUI(device=d,selector=search_results)
         results = root.findall(search_results)[:-1]
