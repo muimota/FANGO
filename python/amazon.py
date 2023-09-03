@@ -52,17 +52,17 @@ def Amazon(loops = 6,savescreens = False):
             tap(*getCenter(clearSuggestion[0]))
             sleep(.2)   
         sleep(1)
-        
-        root = getXMLUI(device = d)
-        suggNodes = root.find(".//node[@resource-id='attach-to-me']")
-        suggestions = [suggNode.find('.//node[@index="1"]').attrib['text'] for suggNode in suggNodes]
+        suggestionSelect = ".//node[@resource-id='attach-to-me'].//node[@index='1']"
+        root = getXMLUI(device = d,selector = suggestionSelect,timeout=5)
+        suggNodes = root.findall(suggestionSelect)
+        suggestions = [suggNode.attrib['text'] for suggNode in suggNodes]
         print(suggestions)
-        if len(suggestions) > 0:
+        if random.random()<.33 and len(suggestions) > 0:
             suggestion = random.choice(suggestions)
             print(suggestion)
             insertText(suggestion[2:])
-            sleep(1)
-            pressKey(66)
+        
+        pressKey(66)
             
         sleep(2)
         swipe(w/2,h/2,w/2,0,random.randint(300,600))
