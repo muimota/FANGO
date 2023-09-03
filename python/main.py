@@ -53,11 +53,11 @@ if __name__ == "__main__":
             rand = random.random()
 
             if rand < .33:
-                Instagram(10)
+                Instagram(3)
             elif rand < .66:
-                Amazon(10)
+                Amazon(3)
             else:
-                Reddit(10)
+                Reddit(3)
 
             
             
