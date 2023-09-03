@@ -67,9 +67,11 @@ def Instagram(loops = 1):
             insertText('#')
             insertText(random.choice(alphabet))
             insertText(random.choice(alphabet))
+            
+            pressKey(66)
             sleep(1)
             swipe(w/2,h/2,w/2,h/6)
-                
+            sleep(1)  
             #suggestion
             root = getXMLUI(device=d,selector=searchSug)
             suggestions = root.findall(searchSug)
@@ -77,6 +79,7 @@ def Instagram(loops = 1):
                 print("suggestions not found")
             tap(*getCenter(random.choice(suggestions)))  	 
             #click in a random image from explore
+            sleep(2)
 
         root = getXMLUI(device=d,selector=imgTile)
         sleep(random.randint(200,2000)/1000)
@@ -91,7 +94,7 @@ def Instagram(loops = 1):
         sleep(random.randint(1000,4000)/1000)
         print("found {} images".format(len(images)))
 
-        clickableImages = [image for image in images if getCenter(image)[1] > h/5 or getCenter(image)[1] > 4*h/5]
+        clickableImages = [image for image in images if getCenter(image)[1] > h/5 or getCenter(image)[1] < 4*h/5]
         index = random.randint(0,len(clickableImages)-1)
         bounds = getCenter(clickableImages[index])
         
