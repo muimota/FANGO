@@ -26,14 +26,14 @@ def Amazon(loops = 6,savescreens = False):
 
     for i in range(loops):
         alphabet = ('abcdefghijklmnopqrstuvwxyz')
-        
+        textFieldSelector = ".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']"
         pressKey(84)
-        root = getXMLUI(device = d)
-        textField = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']")
+        root = getXMLUI(device = d,selector=textFieldSelector)
+        textField = root.find(textFieldSelector)
 
-        sleep(.4)
-        root = getXMLUI(device = d)
-        textField = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']")
+        #sleep(.4)
+        #root = getXMLUI(device = d)
+        #textField = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']")
         bounds = getBounds(textField)
         tap(*(bounds[2]-10,(bounds[1]+bounds[3])//2))
 
