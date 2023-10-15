@@ -27,20 +27,24 @@ def Amazon(loops = 6,savescreens = False):
     for i in range(loops):
         alphabet = ('abcdefghijklmnopqrstuvwxyz')
         textFieldSelector = ".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']"
-        pressKey(84)
+        pressKey(84) #search key
         root = getXMLUI(device = d,selector=textFieldSelector)
         textField = root.find(textFieldSelector)
 
         #sleep(.4)
-        #root = getXMLUI(device = d)
-        #textField = root.find(".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_search_src_text']")
         bounds = getBounds(textField)
         tap(*(bounds[2]-10,(bounds[1]+bounds[3])//2))
 
-        
+        clearSelector = ".//node[@resource-id='com.amazon.mShop.android.shopping:id/rs_clear_text_button_accessibility']"
+        root = getXMLUI(device = d,selector = clearSelector,timeout = 2)
+
+        if root != None:
+            print("clear!")
+            clear  = root.find(clearSelector)
+            tap(*getCenter(clear))
+
         insertText(random.choice(alphabet))
         insertText(random.choice(alphabet))
-        #insertText('er')
         
         sleep(.4)
         root = getXMLUI(device = d)
@@ -67,15 +71,8 @@ def Amazon(loops = 6,savescreens = False):
         sleep(2)
         swipe(w/2,h/2,w/2,0,random.randint(300,600))
         sleep(1)
-        root = getXMLUI(device = d)
-        products = root.findall(".//node[@class='android.widget.Image']")
-        if len(products) > 0:
-            product = random.choice(products)
-            print('product:{}'.format(product.attrib['text']))
-            tap(*getCenter(product))
-        else:
-            print('no product found, tap in center')
-            tap(w/2,h/2)
+        
+        tap(w/2,h/2)
             
         sleep(6)
     
