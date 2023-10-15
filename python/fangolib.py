@@ -8,7 +8,7 @@ import xml.etree.ElementTree as ET
 import random
 
 apps = {'GoogleMaps':('com.google.android.apps.maps','com.google.android.maps.MapsActivity'),
-		'Instagram':('com.instagram.android','com.instagram.mainactivity.MainActivity'),
+		'Instagram':('com.instagram.android','com.instagram.mainactivity.InstagramMainActivity'),
         'Amazon':('com.amazon.mShop.android.shopping','com.amazon.mShop.splashscreen.StartupActivity'),
         'Reddit':('com.reddit.frontpage','launcher.default')
         }
